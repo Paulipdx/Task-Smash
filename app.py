@@ -3,7 +3,10 @@ from flask import Flask, render_template, redirect, request
 from flask_scss import Scss
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import os
 
+# Example: If your Destination Path in 
+Coolify
 # My App
 app = Flask(__name__)  
 Scss(app)
