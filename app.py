@@ -6,7 +6,7 @@ from datetime import datetime
 import os
 
 # Example: If your Destination Path in 
-Coolify
+
 # My App
 app = Flask(__name__)  
 Scss(app)
