@@ -25,16 +25,16 @@ def healthz():
 
 #data class - row of data
 class MyTask(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(100), nullable=False)
-    complete = db.Column(db.Integer, default=0)
-    create = db.Column(db.DateTime, default=datetime.now)
+ id = db.Column(db.Integer, primary_key=True)
+ content = db.Column(db.String(100), nullable=False)
+ complete = db.Column(db.Integer, default=0)
+ create = db.Column(db.DateTime, default=datetime.now)
 
-    def __repr__(self) -> str:
-        return f"Task {self.id}"
+ def __repr__(self) -> str:
+ return f"Task {self.id}"
 
 with app.app_context():
-    db.create_all()
+ db.create_all()
 
 # Routes to Webpages
 # home page 
