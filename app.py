@@ -11,6 +11,10 @@ import os
 app = Flask(__name__)  
 Scss(app)
 
+@app.get("/healthz")
+def healthz():
+ return "ok", 200
+
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////app/instance/database.db"
 
