@@ -11,8 +11,8 @@ import os
 app = Flask(__name__)  
 Scss(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////app/instance/task-db/_data/database.db"
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////app/instance/database.db"
 
 db = SQLAlchemy(app)
 
