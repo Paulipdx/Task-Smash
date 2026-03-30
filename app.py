@@ -12,7 +12,7 @@ app = Flask(__name__)
 Scss(app)
 
 
-
+os.makedirs("/app/instance", exist_ok=True)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////app/instance/database.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -40,7 +40,7 @@ with app.app_context():
 # home page 
 @app.route("/",methods=["POST" , "GET"])
 def index():
-    #ADD TASK 
+    # ADD TASK 
     if request.method == "POST":
         current_task = request.form['content']
         new_task = MyTask(content=current_task)
@@ -51,7 +51,7 @@ def index():
         except Exception as e:
             print(f"ERROR:{e}")
             return f"ERROR:{e}"
-    #see all current taks
+    # see all current tasks
     else: 
         tasks = MyTask.query.order_by(MyTask.create).all()
         return render_template('index.html',tasks=tasks)   
