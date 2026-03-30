@@ -1,16 +1,11 @@
-# imports 
 from flask import Flask, render_template, redirect, request
 from flask_scss import Scss
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
 
-# Example: If your Destination Path in 
-
-# My App
-app = Flask(__name__)  
+app = Flask(__name__)
 Scss(app)
-
 
 os.makedirs("/app/instance", exist_ok=True)
 
@@ -18,12 +13,11 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////app/instance/database.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+
 @app.get("/healthz")
 def healthz():
  return "ok", 200
 
-
-#data class - row of data
 class MyTask(db.Model):
  id = db.Column(db.Integer, primary_key=True)
  content = db.Column(db.String(100), nullable=False)
@@ -36,12 +30,11 @@ class MyTask(db.Model):
 with app.app_context():
  db.create_all()
 
-# Routes to Webpages
-# home page 
-@app.route("/",methods=["POST" , "GET"])
+@app.route("/", methods=["POST", "GET"])
 def index():
-    # ADD TASK 
-    if request.method == "POST":
+ # ADD TASK
+ if request.method == "POST":
+
         current_task = request.form['content']
         new_task = MyTask(content=current_task)
         try:
