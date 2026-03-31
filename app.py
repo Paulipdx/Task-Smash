@@ -10,7 +10,11 @@ Scss(app)
 # Ensure the instance directory exists
 os.makedirs("/app/instance", exist_ok=True)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////app/instance/database.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
+ "DATABASE_URL",
+ "sqlite:////app/instance/database.db"
+)
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
