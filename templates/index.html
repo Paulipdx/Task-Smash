@@ -22,7 +22,7 @@
                 <tr>
                     <td>{{ task.content }}</td>
                     <!-- Changed .create to .date_created as it's a more common naming convention -->
-                    <td>{{ task.create.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ task.create.strftime('%Y-%m-%d') if task.create else '-' }}</td>
                     <td>
                         <a href="/update/{{ task.id }}">Edit</a>
                         <span class="separator">|</span>
