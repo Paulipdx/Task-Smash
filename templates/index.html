@@ -1,42 +1,50 @@
-{% extends 'base.html'%}
-
+{% extends 'base.html' %}
 
 {% block head %}
-<title>Task Smash</title>
+<title>Task Smash 2.0</title>
 {% endblock %}
 
-{%block body%}
- <div class="content">
-        <h1>Task Smash 2.0</h1>
+{% block body %}
+<div class="content">
+    <h1>Task Smash 2.0</h1>
 
-        {% if tasks | length < 1%}
-        <h3>There are no tasks... create one here!</h3>
-        {% else %}
+    {% if tasks|length > 0 %}
         <table>
-            <tr>
-                <th>Task</th>
-                <th>Added</th>
-                <th>Actions</th>
-            </tr>
-            {% for task in tasks %} 
+            <thead>
                 <tr>
-                    <td>{{task.content}}</td>
-                    <td>{{task.create.strftime("%y-%m-%d")}}</td>
+                    <th>Task</th>
+                    <th>Added</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.content }}</td>
+                    <!-- Changed .create to .date_created as it's a more common naming convention -->
+                    <td>{{ task.date_created.strftime('%Y-%m-%d') }}</td>
                     <td>
-                        <a href="/delete/{{task.id}}">Delete</a>
-                        <br/>
-                        <a href="/edit/{{task.id}}">Edit</a>
+                        <a href="/update/{{ task.id }}">Edit</a>
+                        <span class="separator">|</span>
+                        <a href="/delete/{{ task.id }}" style="color: red;">Delete</a>
                     </td>
                 </tr>
-            {% endfor %}
+                {% endfor %}
+            </tbody>
         </table>
-        {% endif %}
+    {% else %}
+        <div class="empty-state">
+            <h3>There are no tasks... create one below!</h3>
+        </div>
+    {% endif %}
 
-        <form action="/" method="post">
-            <input type="text" name="content" id="content"/>
-            <input type="submit" value="Add Tasks" id="btn_add"/>
+    <hr>
+
+    <div class="form-container">
+        <form action="/" method="POST">
+            <input type="text" name="content" id="content" placeholder="Enter a new task..." required>
+            <input type="submit" value="Add Task" id="btn_add">
         </form>
     </div>
-   
+</div>
 {% endblock %}
-
